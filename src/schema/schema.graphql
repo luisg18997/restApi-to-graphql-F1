@@ -1,0 +1,121 @@
+type Query {
+    # season list of F1 from 1950 to current year
+    seasons: [Season!]! 
+    # race by year selected in the F1 from 1950 to current year
+    racesByYear(Year: String): [Race!]!
+    # race by year and round selected
+    raceSelect(year: String!, round: Int!): Race 
+    # history drivers list of the F1  from 1950 to current year
+    driversHistory(pageElements: Int, page: Int): [Driver!]!
+    # driver list by year selected from 1950 to current year
+    driversYear(year: String!): [Driver!]!
+    # dirver list by year and round selected
+    driversYearAndRound(year: String!, round: Int!): [Driver!]!
+    # driver selected by id
+    driverSelect(id: String!): Driver
+     # history constructors list of the F1  from 1950 to current year
+    constructorsHistory(pageElements: Int, page: Int): [Constructor!]!
+    # constructor list by year selected from 1950 to current year
+    constructorsYear(year: String!): [Constructor!]!
+    # dirver list by year and round selected
+    constructorsYearAndRound(year: String!, round: Int!): [Constructor!]!
+    # constructor selected by id
+    constructorSelect(id: String!): Constructor
+    # ranking pilots list by season selected
+     # history constructors list of the F1  from 1950 to current year
+    circuitsHistory(pageElements: Int, page: Int): [Circuit!]!
+    # circuit list by year selected from 1950 to current year
+    circuitsYear(year: String!): [Circuit!]!
+    # dirver list by year and round selected
+    circuitsYearAndRound(year: String!, round: Int!): [Circuit!]!
+    # circuit selected by id
+    circuitSelect(id: String!): Circuit
+    # ranking pilots list by season selected
+    seasonPilotRanking(year: String!): [DriverStanding!]!
+    # ranking pilots list by season selected
+    seasonPilotRankingByRound(year: String! , round: Int!): [DriverStanding!]!
+    # history pilot list of the F1  from 1950 to current year
+    pilotRankingHistory(pageElements: Int, page: Int): [DriverStanding!]!
+     # ranking constructors list by season selected
+    seasonConstructorRanking(year: String!): [ConstructorStanding!]!
+    # ranking constructors list by season selected
+    seasonConstructorRankingByRound(year: String! , round: Int!): [ConstructorStanding!]!
+    # history constructor list of the F1  from 1958 to current year
+    constructorRankingHistory(pageElements: Int, page: Int): [ConstructorStanding!]!
+}
+
+# season of F1
+type Season {
+    year: String!
+    url: String!
+    urlMobile: String!
+}
+
+# location of circuit of the F1
+type Location {
+  lat: String!
+  lng: String!
+  locality: String!
+  country: String!
+}
+
+# circuit of F1
+type Circuit {
+  id: String!
+  url: String!
+  urlMobile: String!
+  name: String!
+  location: Location!
+}
+
+# race of F1 season and circuit
+type Race {
+  season: String!
+  round: String!
+  url: String!
+  urlMobile: String!
+  name: String!
+  date: String!
+  time: String
+  circuit: Circuit!
+}
+
+# information of driver of F1
+type Driver {
+  id: String!
+  url: String!
+  urlMobile: String!
+  name: String!
+  code: String
+  dateOfBirth: String!
+  nationality: String!
+  permanentNumber: String
+}
+
+# information of constructor of F1
+type Constructor {
+  id: String!
+  url: String!
+  urlMobile: String!
+  name: String!
+  nationality: String!
+}
+
+#stadings of driver history of F1
+type DriverStanding {
+  position: String!
+  positionText: String!
+  points: String!
+  wins: String!
+  constructors: [Constructor!]!
+  driver: Driver!
+}
+
+#stadings of constructor history of F1
+type ConstructorStanding {
+  position: String!
+  positionText: String!
+  points: String!
+  wins: String!
+  Constructor: Constructor!
+}
